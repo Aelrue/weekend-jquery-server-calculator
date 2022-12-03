@@ -1,5 +1,5 @@
 $(document).ready(onReady);
-
+// event handlers for each button click
 function onReady() {
   console.log("DOM loaded");
   $("#plus").on("click", appendToDom);
@@ -8,12 +8,13 @@ function onReady() {
   $("#divide").on("click", appendToDom);
   $("#submit").on("click", appendToDom);
   $("#reset").on("click", appendToDom);
+  getEquation();
 }
 
-let equations = {
-  firstValue: $("#firstValueIn").val(),
-  secondValue: $("#secondValueIn").val(),
-};
+// let equations = {
+//   firstValue: $("#firstValueIn").val(),
+//   secondValue: $("#secondValueIn").val(),
+// };
 
 // function addEquation() {
 //   console.log("in addEquation");
@@ -26,12 +27,17 @@ let equations = {
 //   $("#secondValueIn").val("");
 // }
 
+// telling ajax to bring these values to the server
 function postEquation() {
   $.ajax({
     method: "POST",
     url: "/equations",
-    data: equations,
+    data: {
+      firstValue: $("#firstValueIn").val(),
+      secondValue: $("#secondValueIn").val(),
+    },
   })
+
     .then(function (response) {
       console.log("post response", response);
       getEquations();
@@ -41,7 +47,7 @@ function postEquation() {
       alert(error.responseText);
     });
 }
-
+// then get the updated array
 function getEquation() {
   $.ajax({
     method: "GET",
