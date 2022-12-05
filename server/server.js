@@ -8,18 +8,51 @@ const port = 5001;
 app.use(express.static("server/public"));
 app.use(express.urlencoded());
 
+// empty array for results
+const equationHistory = [];
+
 app.listen(port, () => {
   console.log("listening on port", port);
 });
 
 app.get("/equations", function (req, res) {
   console.log("request for /equations made", req.body);
-  res.send("OK");
-  // res.send(equations);
+  res.send(equationHistory);
 });
 
 app.post("/equations", function (req, res) {
   console.log("in post request");
-  equations.push(req.body);
+
+  // let equation = {
+  //   firstValue: $("#firstValueIn").val(),
+  //   secondValue: $("#secondValueIn").val(),
+  //   symbol: symbol,
+  // };
+  const equation = req.body;
+  console.log(equation);
+  const num1 = Number(equation.firstValue);
+  const num2 = Number(equation.secondValue);
+  const symbol = equation.symbol;
+
+  switch (symbol) {
+    case "+":
+      result = num1 + num2;
+      console.log(num1 + num2);
+      break;
+
+    case "-":
+      result = firstValueIn - secondValueIn;
+      break;
+
+    case "*":
+      result = firstValueIn * secondValueIn;
+      break;
+
+    case "/":
+      result = firstValueIn / secondValueIn;
+      break;
+  }
+
+  equationHistory.push(req.body);
   res.sendStatus(201);
 });

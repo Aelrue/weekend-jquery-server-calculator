@@ -1,15 +1,12 @@
 $(document).ready(onReady);
 
-// empty array for results
-const equations = [];
-
 // event handlers for each button click
 function onReady() {
   console.log("DOM loaded");
   $(".symbol").on("click", symbolClick);
   $("#submit").on("click", postEquation);
   $("#reset").on("click", appendToDom);
-  getEquation();
+  getEquations();
 }
 
 // symbol will be whatever symbol button is clicked
@@ -30,23 +27,23 @@ function postEquation() {
   };
   console.log("equations!", equation);
   // telling ajax to send these values (objects) to the server
-  // $.ajax({
-  //   method: "POST",
-  //   url: "/equations",
-  //   data: equation,
-  // })
+  $.ajax({
+    method: "POST",
+    url: "/equations",
+    data: equation,
+  })
 
-  //   .then(function (response) {
-  //     console.log("post response", response);
-  //     getEquations();
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //     alert(error.responseText);
-  //   });
+    .then(function (response) {
+      console.log("post response", response);
+      getEquations();
+    })
+    .catch(function (error) {
+      console.log(error);
+      alert(error.responseText);
+    });
 }
 // then get the updated array
-function getEquation() {
+function getEquations() {
   $.ajax({
     method: "GET",
     url: "/equations",
