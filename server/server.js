@@ -8,16 +8,14 @@ const port = 5001;
 app.use(express.static("server/public"));
 app.use(express.urlencoded());
 
-// empty array for results
-const equations = [];
-
 app.listen(port, () => {
   console.log("listening on port", port);
 });
 
 app.get("/equations", function (req, res) {
-  console.log("request for /equations made");
-  res.send(equations);
+  console.log("request for /equations made", req.body);
+  res.send("OK");
+  // res.send(equations);
 });
 
 app.post("/equations", function (req, res) {
