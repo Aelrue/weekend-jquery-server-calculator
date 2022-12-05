@@ -5,7 +5,7 @@ function onReady() {
   console.log("DOM loaded");
   $(".symbol").on("click", symbolClick);
   $("#submit").on("click", postEquation);
-  $("#reset").on("click", appendToDom);
+  $("#reset").on("click", clearCalc);
   getEquations();
 }
 
@@ -32,10 +32,10 @@ function postEquation() {
     url: "/equations",
     data: equation,
   })
-
     .then(function (response) {
       console.log("post response", response);
       getEquations();
+      clearCalc();
     })
     .catch(function (error) {
       console.log(error);
@@ -52,14 +52,20 @@ function getEquations() {
     appendToDom(response);
   });
 }
+
 // and append that to the DOM
 function appendToDom(array) {
   console.log("in appendToDom", array);
-  $("#output").empty();
 
+  $("#output").empty();
   // for (let object of array) {
   //   $("#output").append(`
   //   <li>${object.firstValue}${object.secondValue}</li>
   //   `);
   // }
+}
+function clearCalc() {
+  $("#firstValueIn").val("");
+  $("#secondValueIn").val("");
+  symbol = "";
 }
