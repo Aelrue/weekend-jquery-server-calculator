@@ -23,36 +23,23 @@ app.get("/equations", function (req, res) {
 app.post("/equations", function (req, res) {
   console.log("in post request");
 
-  // let equation = {
-  //   firstValue: $("#firstValueIn").val(),
-  //   secondValue: $("#secondValueIn").val(),
-  //   symbol: symbol,
-  // };
   const equation = req.body;
   console.log(equation);
   const num1 = Number(equation.firstValue);
   const num2 = Number(equation.secondValue);
-  const symbol = equation.symbol;
 
-  switch (symbol) {
+  switch (equation.symbol) {
     case "+":
       equation.result = num1 + num2;
-      console.log(num1 + num2);
       break;
-
     case "-":
       equation.result = num1 - num2;
-      console.log(num1 - num2);
       break;
-
     case "*":
       equation.result = num1 * num2;
-      console.log(num1 * num2);
       break;
-
     case "/":
       equation.result = num1 / num2;
-      console.log(num1 / num2);
       break;
   }
 

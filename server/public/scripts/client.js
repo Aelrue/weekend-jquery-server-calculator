@@ -2,7 +2,6 @@ $(document).ready(onReady);
 
 // event handlers for each button click
 function onReady() {
-  console.log("DOM loaded");
   $(".symbol").on("click", symbolClick);
   $("#submit").on("click", postEquation);
   $("#reset").on("click", clearCalc);
@@ -12,20 +11,16 @@ function onReady() {
 // symbol will be whatever symbol button is clicked
 let symbol = "";
 function symbolClick() {
-  console.log("clicked");
   symbol = this.value;
-  console.log(symbol);
 }
 
 function postEquation() {
-  console.log("in postEquation");
   // form information and symbol button clicked make up equation data
   let equation = {
     firstValue: $("#firstValueIn").val(),
     secondValue: $("#secondValueIn").val(),
     symbol: symbol,
   };
-  console.log("equations!", equation);
   // telling ajax to send these values (objects) to the server
   $.ajax({
     method: "POST",
@@ -37,7 +32,6 @@ function postEquation() {
       clearCalc();
     })
     .catch(function (error) {
-      console.log(error);
       alert(error.responseText);
     });
 }
@@ -47,7 +41,6 @@ function getEquations() {
     method: "GET",
     url: "/equations",
   }).then(function (response) {
-    console.log("response from server", response);
     appendToDom(response);
   });
 }
