@@ -58,12 +58,13 @@ function appendToDom(array) {
   console.log("in appendToDom", array);
 
   $("#output").empty();
-  // for (let object of array) {
-  //   $("#output").append(`
-  //   <li>${object.firstValue}${object.secondValue}</li>
-  //   `);
-  // }
+  for (let object of array) {
+    $("#output").append(`
+    <li>${object.firstValue} ${object.symbol} ${object.secondValue} = ${object.result}</li>
+    `);
+  }
 }
+
 function clearCalc() {
   $("#firstValueIn").val("");
   $("#secondValueIn").val("");
