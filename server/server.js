@@ -36,23 +36,26 @@ app.post("/equations", function (req, res) {
 
   switch (symbol) {
     case "+":
-      result = num1 + num2;
+      equation.result = num1 + num2;
       console.log(num1 + num2);
       break;
 
     case "-":
-      result = firstValueIn - secondValueIn;
+      equation.result = num1 - num2;
+      console.log(num1 - num2);
       break;
 
     case "*":
-      result = firstValueIn * secondValueIn;
+      equation.result = num1 * num2;
+      console.log(num1 * num2);
       break;
 
     case "/":
-      result = firstValueIn / secondValueIn;
+      equation.result = num1 / num2;
+      console.log(num1 / num2);
       break;
   }
 
-  equationHistory.push(req.body);
+  equationHistory.push(equation);
   res.sendStatus(201);
 });
