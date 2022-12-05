@@ -33,7 +33,6 @@ function postEquation() {
     data: equation,
   })
     .then(function (response) {
-      console.log("post response", response);
       getEquations();
       clearCalc();
     })
@@ -55,7 +54,8 @@ function getEquations() {
 
 // and append that to the DOM
 function appendToDom(array) {
-  console.log("in appendToDom", array);
+  $("#answer").empty();
+  $("#answer").append(`${array[array.length - 1].result}`);
 
   $("#output").empty();
   for (let object of array) {
