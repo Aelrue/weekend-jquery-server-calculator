@@ -8,7 +8,7 @@ const port = 5001;
 app.use(express.static("server/public"));
 app.use(express.urlencoded());
 
-// empty array for results
+// start with empty array for results
 const equationHistory = [];
 
 app.listen(port, () => {
